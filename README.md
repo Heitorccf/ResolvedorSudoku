@@ -10,7 +10,6 @@ Este é um programa simples de Sudoku implementado em Python. Ele oferece duas f
 ## Requisitos
 
 - Python 3.x
-- Sistema operacional compatível com o comando `clear` (Linux/macOS) ou `cls` (Windows).
 
 ## Como Executar
 
