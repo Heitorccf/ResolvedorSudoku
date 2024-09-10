@@ -3,6 +3,7 @@ import time
 import os
 
 def create_board():
+    # Criação de um tabuleiro de Sudoku válido e aleatório
     base = 3
     side = base * base
 
@@ -19,6 +20,7 @@ def create_board():
 
     board = [[nums[pattern(r, c)] for c in cols] for r in rows]
 
+    # Removendo alguns números para criar o puzzle
     squares = side * side
     empties = squares * 3 // 4
     for p in random.sample(range(squares), empties):
@@ -27,6 +29,7 @@ def create_board():
     return board
 
 def print_board(board):
+    # Imprime o tabuleiro de Sudoku formatado
     for i in range(len(board)):
         if i % 3 == 0 and i != 0:
             print("- - - - - - - - - - - - ")
@@ -39,6 +42,7 @@ def print_board(board):
                 print(str(board[i][j]) + " ", end="")
 
 def find_empty(board):
+    # Encontra uma célula vazia no tabuleiro
     for i in range(len(board)):
         for j in range(len(board[0])):
             if board[i][j] == 0:
@@ -46,14 +50,18 @@ def find_empty(board):
     return None
 
 def valid(board, num, pos):
+    # Verifica se um número é válido em uma determinada posição
+    # Verifica a linha
     for i in range(len(board[0])):
         if board[pos[0]][i] == num and pos[1] != i:
             return False
 
+    # Verifica a coluna
     for i in range(len(board)):
         if board[i][pos[1]] == num and pos[0] != i:
             return False
 
+    # Verifica o quadrado 3x3
     box_x = pos[1] // 3
     box_y = pos[0] // 3
 
@@ -65,6 +73,7 @@ def valid(board, num, pos):
     return True
 
 def solve(board):
+    # Resolve o Sudoku usando backtracking
     find = find_empty(board)
     if not find:
         return True
@@ -83,6 +92,7 @@ def solve(board):
     return False
 
 def solve_with_visualization(board):
+    # Resolve o Sudoku com visualização em tempo real
     find = find_empty(board)
     if not find:
         return True
@@ -107,6 +117,7 @@ def solve_with_visualization(board):
     return False
 
 def play_sudoku():
+    # Permite que o usuário jogue Sudoku
     board = create_board()
     print("Bem-vindo ao jogo de Sudoku!")
     print("Tabuleiro inicial:")
@@ -128,6 +139,7 @@ def play_sudoku():
             break
 
 def main():
+    # Loop principal do programa
     while True:
         print("\n1. Jogar Sudoku")
         print("2. Resolver por força bruta")
